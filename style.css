@@ -46,6 +46,14 @@ a:visited {
   color: #0041ce;
 }
 
+a.back-home {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  font-size: 25px;
+}
+
 table {
   margin: 40px auto;
   border: 5px solid #333;
@@ -55,4 +63,28 @@ table {
 th, td, tr {
   border: 2px solid #333;
   padding: 5px;
+}
+
+@media (max-width: 1050px) {
+  body {
+    max-width: 80%;
+  }
+
+  a.back-home {
+    padding: 5px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  body {
+    max-width: 100%;
+  }
+
+  a.back-home {
+    position: static;
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+  }
 }

@@ -45,3 +45,14 @@ a {
 a:visited {
   color: #0041ce;
 }
+
+table {
+  margin: 40px auto;
+  border: 5px solid #333;
+  border-collapse: collapse;
+}
+
+th, td, tr {
+  border: 2px solid #333;
+  padding: 5px;
+}

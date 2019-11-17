@@ -36,3 +36,12 @@ blockquote {
   padding: 10px;
   margin-left: 0;
 }
+
+a {
+  text-decoration: none;
+  color: #0071ce;
+}
+
+a:visited {
+  color: #0041ce;
+}

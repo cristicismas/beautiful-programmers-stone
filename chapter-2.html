@@ -788,7 +788,7 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm) {
   BOOL fDone = FALSE;
   DWORD dw;
 
-  while  (!fDone) {
+  while (!fDone) {
     // Wait forever for the mutex to become signaled.
     dw = WaitForSingleObject(g_hMutex, INFINITE);
 
@@ -866,7 +866,7 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
   while (!fDone) 
   {
     // Wait forever for the mutex to become signaled.
-    if (WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0)
+    if (WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0)
     {
       // Mutex became signalled.
       if (g_nIndex < MAX_TIMES)
@@ -899,7 +899,7 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
     BOOL fDone = FALSE;
 
     while (!fDone &&
-            WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0) 
+            WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0) 
     {
         // Mutex became signalled.
         if (g_nIndex < MAX_TIMES)
@@ -930,7 +930,7 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
     BOOL fDone = FALSE;
 
     while (!fDone &&
-            WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0) 
+            WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0) 
     {
         if (g_nIndex < MAX_TIMES)
           g_dwTimes[g_nIndex++] = GetTickCount();
@@ -965,7 +965,7 @@ DWORD SecondThread (void *ThreadParm)
 {
   BOOL done = FALSE;
   
-  while (!done && WaitForSingleObject(Mutex, INFINITE)==WAIT_OBJECT_0) 
+  while (!done && WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0) 
   {
     if (Index < MAX_TIMES)
       Times[Index++] = GetTickCount();
@@ -1225,5 +1225,7 @@ hThreads[1] = CreateThread(..., TheThread, ...);</pre
     </address>
 
     <a href="/" class="back-home">Home</a>
+
+    <script src="/index.js"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <title>Design Principles</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Design Principles</h1>
@@ -68,7 +68,7 @@
       experience. They are not derived from any underlying theory. Examples of
       kinds of system yours might be are:
     </p>
-    
+
     <h3>Monolithic</h3>
     <p>
       Centralised processing and either offline connections to users or pretty
@@ -193,26 +193,26 @@
       function return to allow for terse idioms, which make for apprehendable
       code and beyond that, the quality plateau:
     </p>
-    
-    <pre><code>
+
+    <pre>
 if((fp = fopen(...)) == NULL)
 {
-   // Error
+  // Error
 }
+</pre
+    >
 
-</code>
-</pre>
     <p>
       or
     </p>
-    
-    <pre><code>
+
+    <pre>
 if(!DoTheBusiness())
 {
-   // Error
+  // Error
 }
-</code>
-</pre>
+</pre
+    >
     <p>
       One hears many excuses for bloating up the error handling logic to the
       point where a rigorously coded function call can take so many lines of
@@ -264,19 +264,19 @@ if(!DoTheBusiness())
       higher if you just want to handle it than if you want to know how it got
       into trouble. An error message from a low level saying
     </p>
-    
-    <pre><code>
+
+    <pre>
 Could not write() datafile ftell() = 246810
-</code>
-</pre>
+</pre
+    >
     <p>
       followed by another saying
     </p>
-    
-    <pre><code>
+
+    <pre>
 Could not Save World
-</code>
-</pre>
+</pre
+    >
     <p>
       just doesn't help with debug. You can throw exceptions up a layer at a
       time without compromising the main flow, and should think about doing
@@ -392,7 +392,7 @@ Could not Save World
       Don't fall into this trap. Let data represent themselves, or as Laurie
       Anderson said in <i>Big Science</i>,
     </p>
-    
+
     <pre><code>
 Let X = X
 </code>
@@ -417,7 +417,7 @@ Let X = X
       resources. Try to use initialisation protocols that start by determining a
       known state and moving forward instead. An example might be,
     </p>
-    
+
     <ol>
       <li>
         Find an input file
@@ -479,7 +479,7 @@ Let X = X
       The two deep questions when finding objects and how they link together
       are:
     </p>
-    
+
     <ol>
       <li>
         Who instantiates who?
@@ -834,7 +834,7 @@ Let X = X
         Copyright (c) Alan G Carter and Colston Sanger 1997
       </i>
     </p>
-    
+
     <address>
       <a href="mailto:alan@melloworld.com">alan@melloworld.com</a>
     </address>

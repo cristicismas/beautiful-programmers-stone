@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <title>Thinking about Programming</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>
@@ -536,13 +536,15 @@
       We can get a rigorous and elegant coding discipline out of the difference
       between intentionality and action. Consider the following fragment:
     </p>
-    <pre><tt>// Search the list of available dealers and find those that
-// handle the triggering stock.&nbsp; Send them notification of
+    <pre>
+// Search the list of available dealers and find those that
+// handle the triggering stock. Send them notification of
 // the event.
 
 for(DealerIterator DI(DealersOnline); DI.more(); DI++)
-&nbsp; if(DI.CurrentDealer()-&gt;InPortfolio(TheEvent.GetStock()))
-&nbsp;&nbsp;&nbsp; DI.CurrentDealer()-&gt;HandleEvent(TheEvent);</tt></pre>
+  if(DI.CurrentDealer()->InPortfolio(TheEvent.GetStock()))
+    DI.CurrentDealer()->HandleEvent(TheEvent);</pre
+    >
     The definition of the objects has allowed the intentionality of the use case
     to be expressed succinctly. However, there is really no smaller granularity
     where we can cluster intentionality into comment and action into code
@@ -778,170 +780,168 @@ for(DealerIterator DI(DealersOnline); DI.more(); DI++)
       Richter sets out to provide as clear as exposition of how to use Win32 as
       he can, but even in his examples (and partially as a result of the
       conventions he is following), complexity that we can lose appears. On page
-      319, there is a function <tt>SecondThread()</tt> We'll just look at the
-      function, and leave the remainder of the program and some global
-      definitions:
+      319, there is a function SecondThread() We'll just look at the function,
+      and leave the remainder of the program and some global definitions:
     </p>
-    <pre><tt>DWORD WINAPI SecondThread (LPVOID lpwThreadParm) {
-&nbsp; BOOL fDone = FALSE;
-&nbsp; DWORD dw;
+    <pre>
+DWORD WINAPI SecondThread (LPVOID lpwThreadParm) {
+  BOOL fDone = FALSE;
+  DWORD dw;
 
-&nbsp; while&nbsp; (!fDone) {
-&nbsp;&nbsp;&nbsp; // Wait forever for the mutex to become signaled.
-&nbsp;&nbsp;&nbsp; dw = WaitForSingleObject(g_hMutex, INFINITE);
+  while  (!fDone) {
+    // Wait forever for the mutex to become signaled.
+    dw = WaitForSingleObject(g_hMutex, INFINITE);
 
-&nbsp;&nbsp;&nbsp; if (dw == WAIT_OBJECT_0) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Mutex became signalled.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (g_nIndex &gt;= MAX_TIMES) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fDone = TRUE;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_nIndex++;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_dwTimes[g_nIndex - 1] = GetTickCount():
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+    if (dw == WAIT_OBJECT_0) {
+      // Mutex became signalled.
+      if (g_nIndex >= MAX_TIMES) {
+        fDone = TRUE;
+      } else {
+        g_nIndex++;
+        g_dwTimes[g_nIndex - 1] = GetTickCount():
+      }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Release the mutex.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReleaseMutex(g_hMutex);
-&nbsp;&nbsp;&nbsp; } else {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // The mutex was abandoned.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;// Exit the while loop.
-&nbsp;&nbsp;&nbsp; }
-&nbsp; }
-&nbsp; return(0);
-}</tt></pre>
+      // Release the mutex.
+      ReleaseMutex(g_hMutex);
+    } else {
+      // The mutex was abandoned.
+      break;// Exit the while loop.
+    }
+  }
+  return(0);
+}</pre
+    >
     First let's just simplify the brace style, loose the extra space between
-    keyword and open bracket, and the redundant <tt>ReleaseMutex</tt> comment.
-    We are aware that there is a religious war between the followers of K&amp;R
-    and Wirth on brace style, but getting the blocking symmetric really does
-    make things easier to see. The extra line it takes will be won back later -
-    bear with us!
-    <pre><tt>DWORD WINAPI SecondThread(LPVOID lpwThreadParm)
+    keyword and open bracket, and the redundant ReleaseMutex comment. We are
+    aware that there is a religious war between the followers of K&R and Wirth
+    on brace style, but getting the blocking symmetric really does make things
+    easier to see. The extra line it takes will be won back later - bear with
+    us!
+    <pre>
+DWORD WINAPI SecondThread(LPVOID lpwThreadParm)
 {
-&nbsp;&nbsp;&nbsp; BOOL fDone = FALSE;
-&nbsp;&nbsp;&nbsp; DWORD dw;
+  BOOL fDone = FALSE;
+  DWORD dw;
 
-&nbsp;&nbsp;&nbsp; while(!fDone)
-&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Wait forever for the mutex to become signaled.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw = WaitForSingleObject(g_hMutex, INFINITE);
+  while(!fDone)
+  {
+    // Wait forever for the mutex to become signaled.
+    dw = WaitForSingleObject(g_hMutex, INFINITE);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(dw == WAIT_OBJECT_0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Mutex became signalled.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(g_nIndex &gt;= MAX_TIMES)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fDone = TRUE;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_nIndex++;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_dwTimes[g_nIndex - 1] = GetTickCount():
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+    if(dw == WAIT_OBJECT_0)
+    {
+      // Mutex became signalled.
+      if(g_nIndex >= MAX_TIMES)
+      {
+        fDone = TRUE;
+      }
+      else
+      {
+        g_nIndex++;
+        g_dwTimes[g_nIndex - 1] = GetTickCount():
+      }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReleaseMutex(g_hMutex);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // The mutex was abandoned.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;// Exit the while loop.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp; return(0);
-}</tt></pre>
-    It's easy to lose one local variable: <tt>dw</tt> is assigned then tested in
-    the next statement. Inverting the sense of the test helps locality of
-    reference (testing then changing <tt>g_nIndex</tt>). And while we are about
-    it there is no point incrementing <tt>g_nIndex</tt> just to subtract 1 from
-    its current value in the next operation! We are already using the C
-    post-increment operator, which was provided for just this sort of job.
-    <pre><tt>DWORD WINAPI SecondThread (LPVOID lpwThreadParm)&nbsp;
+      ReleaseMutex(g_hMutex);
+    }
+    else
+    {
+      // The mutex was abandoned.
+      break;// Exit the while loop.
+    }
+  }
+  return(0);
+}</pre
+    >
+    It's easy to lose one local variable: dw is assigned then tested in the next
+    statement. Inverting the sense of the test helps locality of reference
+    (testing then changing g_nIndex). And while we are about it there is no
+    point incrementing g_nIndex just to subtract 1 from its current value in the
+    next operation! We are already using the C post-increment operator, which
+    was provided for just this sort of job.
+    <pre>
+DWORD WINAPI SecondThread (LPVOID lpwThreadParm) 
 {
-&nbsp;&nbsp;&nbsp; BOOL fDone = FALSE;
+  BOOL fDone = FALSE;
 
-&nbsp;&nbsp;&nbsp; while (!fDone)&nbsp;
-&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Wait forever for the mutex to become signaled.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Mutex became signalled.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (g_nIndex &lt; MAX_TIMES)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_dwTimes[g_nIndex++] = GetTickCount();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fDone = TRUE;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReleaseMutex(g_hMutex);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // The mutex was abandoned.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;// Exit the while loop.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp; return(0);
-}</tt></pre>
+  while (!fDone) 
+  {
+    // Wait forever for the mutex to become signaled.
+    if (WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0)
+    {
+      // Mutex became signalled.
+      if (g_nIndex < MAX_TIMES)
+      {
+        g_dwTimes[g_nIndex++] = GetTickCount();
+      }
+      else
+      {
+        fDone = TRUE;
+      }
+      
+      ReleaseMutex(g_hMutex);
+    } 
+    else 
+    {
+      // The mutex was abandoned.
+      break;// Exit the while loop.
+    }
+  }
+  return(0);
+}</pre
+    >
     The break depends only on the result of WaitForSingleObject, so it is a
     simple matter to move the test up into the controlling expression,
     eliminating both the break and a level of indentation:
 
-    <p>
-      <tt
-        >DWORD WINAPI SecondThread (LPVOID lpwThreadParm)&nbsp;<br />
-        {<br />
-        &nbsp;&nbsp;&nbsp; BOOL fDone = FALSE;<br />
-        <br />
-        &nbsp;&nbsp;&nbsp; while (!fDone &amp;&amp;
-        WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0)&nbsp;<br />
-        &nbsp;&nbsp;&nbsp; {<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Mutex became signalled.<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (g_nIndex &lt;
-        MAX_TIMES)<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        g_dwTimes[g_nIndex++] = GetTickCount();<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fDone
-        = TRUE;<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReleaseMutex(g_hMutex);<br />
-        &nbsp;&nbsp;&nbsp; }<br />
-        &nbsp;&nbsp;&nbsp; return(0);<br />
-        }</tt
-      >
-    </p>
+    <pre>
+DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
+{
+    BOOL fDone = FALSE;
+
+    while (!fDone &&
+            WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0) 
+    {
+        // Mutex became signalled.
+        if (g_nIndex < MAX_TIMES)
+        {
+          g_dwTimes[g_nIndex++] = GetTickCount();
+        }
+        else
+        {
+          fDone = TRUE;
+        }
+
+        ReleaseMutex(g_hMutex);
+    }
+    return(0);
+}
+    </pre>
+
     <p>
       Now just squeeze... We know that lots of coding standards say that we must
       always put the curly brackets in because sometimes silly people made
       unreadable messes, but look what happens when we dump the rule, and
       concentrate on the intent of making the code readable.
     </p>
-    <p>
-      <tt
-        >DWORD WINAPI SecondThread (LPVOID lpwThreadParm)&nbsp;<br />
-        {<br />
-        &nbsp;&nbsp;&nbsp; BOOL fDone = FALSE;<br />
-        <br />
-        &nbsp;&nbsp;&nbsp; while (!fDone &amp;&amp;
-        WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0)&nbsp;<br />
-        &nbsp;&nbsp;&nbsp; {<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (g_nIndex &lt;
-        MAX_TIMES)<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        g_dwTimes[g_nIndex++] = GetTickCount();<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fDone
-        = TRUE;</tt
-      >
-      <br /><tt
-        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReleaseMutex(g_hMutex);<br />
-        &nbsp;&nbsp;&nbsp; }<br />
-        &nbsp;&nbsp;&nbsp; return(0);<br />
-        }</tt
-      >
-    </p>
+
+    <pre>
+DWORD WINAPI SecondThread (LPVOID lpwThreadParm) 
+{
+    BOOL fDone = FALSE;
+
+    while (!fDone &&
+            WaitForSingleObject(g_hMutex, INFINITE)==WAIT_OBJECT_0) 
+    {
+        if (g_nIndex < MAX_TIMES)
+          g_dwTimes[g_nIndex++] = GetTickCount();
+        else
+          fDone = TRUE;
+
+        ReleaseMutex(g_hMutex);
+    }
+    return(0);
+}
+    </pre>
     <p>
       Now for some real heresy. Gosh, by the time we've finished this total
       irresponsibility the result will be totally illegible. (Or of course,
@@ -951,47 +951,47 @@ for(DealerIterator DI(DealersOnline); DI.more(); DI++)
       Heresies are, if we know what our variables are, we'll know their type. If
       we don't know what a variable is for, knowing its type won't help much.
       Anyway, the compilers type-check every which way these days. So drop the
-      Hungarian, and gratuitous fake type extensions that are just
-      <tt>#define</tt>d to nothing somewhere. Hiding dereferences in typedefs is
-      another pointless exercise because although it accomplishes a kind of
-      encapsulation of currency, it is never sufficiently continent that we
-      never have to worry about it, and then a careful programmer has to keep
-      the real types in mind. Maintaining a concept of long pointers in variable
-      names in what is a flat 32 bit API is pretty silly too.
+      Hungarian, and gratuitous fake type extensions that are just #defined to
+      nothing somewhere. Hiding dereferences in typedefs is another pointless
+      exercise because although it accomplishes a kind of encapsulation of
+      currency, it is never sufficiently continent that we never have to worry
+      about it, and then a careful programmer has to keep the real types in
+      mind. Maintaining a concept of long pointers in variable names in what is
+      a flat 32 bit API is pretty silly too.
     </p>
-    <p>
-      <tt
-        >DWORD SecondThread (void *ThreadParm)&nbsp;<br />
-        {<br />
-        &nbsp;&nbsp;&nbsp; BOOL done = FALSE;<br />
-        <br />
-        &nbsp;&nbsp;&nbsp; while (!done &amp;&amp; WaitForSingleObject(Mutex,
-        INFINITE)==WAIT_OBJECT_0)&nbsp;<br />
-        &nbsp;&nbsp;&nbsp; {<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (Index &lt; MAX_TIMES)<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Times[Index++] = GetTickCount();<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; done
-        = TRUE;</tt
-      >
-    </p>
-    <pre><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReleaseMutex(Mutex);
-&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp; return(0);
-}</tt></pre>
-    Now watch. We will hit the Quality Plateau...
-    <pre><tt>DWORD SecondThread(void *ThreadParm)
+
+    <pre>
+DWORD SecondThread (void *ThreadParm) 
 {
-&nbsp;&nbsp;&nbsp; while(Index &lt; MAX_TIMES &amp;&amp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0)
-&nbsp;&nbsp;&nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (Index &lt; MAX_TIMES)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Times[Index++] = GetTickCount():
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReleaseMutex(Mutex);
-&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp; return(0);
-}</tt></pre>
+  BOOL done = FALSE;
+  
+  while (!done && WaitForSingleObject(Mutex, INFINITE)==WAIT_OBJECT_0) 
+  {
+    if (Index < MAX_TIMES)
+      Times[Index++] = GetTickCount();
+    else
+      done = TRUE;
+    ReleaseMutex(Mutex);
+  }
+  return(0);
+}
+    </pre>
+
+    Now watch. We will hit the Quality Plateau...
+
+    <pre>
+DWORD SecondThread(void *ThreadParm)
+{
+  while(Index < MAX_TIMES && 
+    WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0)
+  {
+    if (Index < MAX_TIMES)
+      Times[Index++] = GetTickCount():
+    ReleaseMutex(Mutex);
+  }
+  return(0);
+}
+    </pre>
     <p>
       Eleven lines <i>vs</i> 26. One less level of indentation, but the
       structure completely transparent. Two local variables eliminated. No else
@@ -1000,14 +1000,18 @@ for(DealerIterator DI(DealersOnline); DI.more(); DI++)
     <p>
       Finally, the text has made it clear that different threads execute
       functions in different contexts. It is not necessary to define one
-      function called <tt>FirstThread()</tt>, with exactly the same cut and
-      paste definition as <tt>SecondThread()</tt>, and call them,
+      function called FirstThread(), with exactly the same cut and paste
+      definition as SecondThread(), and call them,
     </p>
-    <pre><tt>hThreads[0] = CreateThread(..., FirstThread, ...);
-hThreads[1] = CreateThread(..., SecondThread, ...);</tt></pre>
+    <pre>
+hThreads[0] = CreateThread(..., FirstThread, ...);
+hThreads[1] = CreateThread(..., SecondThread, ...);</pre
+    >
     When it could just say,
-    <pre><tt>hThreads[0] = CreateThread(..., TheThread, ...);
-hThreads[1] = CreateThread(..., TheThread, ...);</tt></pre>
+    <pre>
+hThreads[0] = CreateThread(..., TheThread, ...);
+hThreads[1] = CreateThread(..., TheThread, ...);</pre
+    >
     <p>
       About a third of this example is actually clone code! If we did see a bug
       in one instance, we'd have to remember to correct the other one too. Why
@@ -1210,7 +1214,7 @@ hThreads[1] = CreateThread(..., TheThread, ...);</tt></pre>
         Copyright (c) Alan G Carter and Colston Sanger 1997
       </i>
     </p>
-    
+
     <address>
       <a href="mailto:alan@melloworld.com">alan@melloworld.com</a>
     </address>

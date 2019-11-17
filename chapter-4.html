@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <title>Customs and Practices</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Customs and Practices</h1>
@@ -146,7 +146,7 @@
         <tr>
           <td>Ashamed</td>
           <td>Steal Vole</td>
-          <td>&nbsp;</td>
+          <td></td>
           <td>Dead Martian</td>
         </tr>
       </tbody>
@@ -505,19 +505,19 @@
       In the first, there is no other way. Imagine a recursive walk of a binary
       tree:
     </p>
-    <pre><code>void Walk(NODE *Node)
+    <pre>
+void Walk(NODE *Node)
 {
-   // Do whatever we came here to do...
+  // Do whatever we came here to do...
 
-   // Shall we recurse left?
+  // Shall we recurse left?
+  if(Node->Left) Walk(Node->Left);
 
-   if(Node-&gt;Left) Walk(Node-&gt;Left);
-
-   // Shall we recurse right?
-
-   if(Node-&gt;Right) Walk(Node-&gt;Right);
-}</code>
-</pre>
+  // Shall we recurse right?
+  if(Node->Right) Walk(Node->Right);
+}
+</pre
+    >
     <p>
       So as we walk the tree, we start by making calls that lead us left, left,
       left, left... until the bottom. We then wander about in the tree, visiting
@@ -533,28 +533,27 @@
       recursion elimination:
     </p>
 
-    <pre><code>void Walk(NODE *Node)
+    <pre>
+void Walk(NODE *Node)
 {
 Label:
+    // Do whatever we came here to do...
 
-   // Do whatever we came here to do...
+    // Shall we recurse left?
+    if(Node->Left) Walk(Node->Left);
 
-   // Shall we recurse left?
-
-   if(Node-&gt;Left) Walk(Node-&gt;Left);
-
-   // Shall we recurse right?
-
-   if(Node-&gt;Right)
-   {
+    // Shall we recurse right?
+    if(Node->Right)
+    {
       // Tail recursion elimination used for efficiency
 
-      Node = Node-&gt;Right;
+      Node = Node->Right;
 
       goto Label;
-   }
-}</code>
-</pre>
+    }
+}
+</pre
+    >
     <p>
       We use the stack to keep track of where we are to the left, but after we
       have explored left, the right walk doesn't need to keep position. So we
@@ -563,6 +562,7 @@ Label:
       module to the source. For an awesome example of this kind of thing, see
       Duff's Device in Stroustrup's <i>The C++ Programming Language</i>.
     </p>
+
     <p>
       The second example is a pure style issue - no need to invoke assembly
       language at all. Remember that when Djikstra considered
@@ -576,46 +576,48 @@ Label:
       self-styled structuralist might say:
     </p>
 
-    <pre><code>BOOL Done = FALSE;
+    <pre>
+BOOL Done = FALSE;
 
-  while(!Done)
+while(!Done)
+{
+  if(OpenPort())
   {
-    if(OpenPort())
+    if(InitPort())
     {
-      if(InitPort())
+      if(InitModem())
       {
-        if(InitModem())
+        if(SetupConnection())
         {
-          if(SetupConnection())
+          if(Logon())
           {
-            if(Logon())
+            if(Fetch())
             {
-              if(Fetch())
-              {
-                Done = TRUE; // Ouch! Hit the right hand side!
-              }
+              Done = TRUE; // Ouch! Hit the right hand side!
             }
           }
         }
       }
     }
   }
-</code>
-</pre>
+}
+</pre
+    >
     <p>
       Which we think is just silly. There is a cleaner alternative that makes
-      use of the way the <code>&amp;&amp;</code> operator stops as soon as the
-      statement it is in is rendered <code>FALSE</code>
+      use of the way the <code>&&</code> operator stops as soon as the statement
+      it is in is rendered <code>FALSE</code>
       - `misuse' of the language normally deprecated in most coding standards:
     </p>
 
     <pre>
-        <code>while(!(OpenPort()&amp;&amp;
-           InitPort()&amp;&amp;
-           InitModem()&amp;&amp;
-           SetupConnection()&amp;&amp;
-           Logon()&amp;&amp;
-           Fetch()));
+        <code>
+while(!(OpenPort() &&
+        InitPort() &&
+        InitModem() &&
+        SetupConnection() &&
+        Logon() &&
+        Fetch()));
         </code>
 </pre>
     <p>
@@ -625,13 +627,14 @@ Label:
       strings and so forth, and to work with the code one needs it laid out like
       a script. In this case, we can do this:
     </p>
-    
-    <pre><code> Start:  if(!OpenPort())goto Start;
-            if(!InitPort())goto Start;
-            if(!InitModem())goto Start;
-            if(!SetupConnection())goto Start;
-            if(!Logon())goto Start;
-            if(!Fetch())goto Start;
+
+    <pre><code> 
+Start:  if(!OpenPort()) goto Start;
+        if(!InitPort()) goto Start;
+        if(!InitModem()) goto Start;
+        if(!SetupConnection()) goto Start;
+        if(!Logon()) goto Start;
+        if(!Fetch()) goto Start;
 </code>
 </pre>
     <p>

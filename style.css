@@ -10,3 +10,29 @@ body {
 h2 {
   margin-top: 50px;
 }
+
+.center {
+  text-align: center;
+}
+
+pre, code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #e3e3e3;
+}
+
+pre {
+  font-size: 14px;
+  line-height: 18px;
+  padding: 10px;
+  overflow: auto;
+}
+
+code {
+  padding: 0 5px;
+}
+
+blockquote {
+  background-color: #e3e3e3;
+  padding: 10px;
+  margin-left: 0;
+}

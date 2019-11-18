@@ -54,6 +54,24 @@ a.back-home {
   font-size: 25px;
 }
 
+#navigation-links {
+  display: flex;
+  justify-content: center;
+}
+
+#navigation-links > a {
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px 15px;
+  background-color: #e9e9e9;
+  text-align: center;
+}
+
+#navigation-links > a:hover {
+  background-color: #ddd;
+}
+
 table {
   margin: 40px auto;
   border: 5px solid #333;

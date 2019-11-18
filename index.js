@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function highlightSyntax(element) {
-  const keyword = /\b(DWORD|WINAPI|DealerIterator|if|else|while|for|->|<|>|(|)|()|!|&|&&|<|>|void|=|==|TRUE|FALSE|break|return)(?=[^\w])/g;
+  const keyword = /\b(DWORD|BOOL|INFINITE|DI|CreateThread|if|else|while|for|->|<|>|(|)|()|!|&|&&|<|>|void|=|==|TRUE|FALSE|break|return)(?=[^\w])/g;
   const comment = /(\/\/.*)/g;
 
   let parsedElement = element.textContent;

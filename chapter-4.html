@@ -513,13 +513,13 @@
     <pre>
 void Walk(NODE *Node)
 {
-  // Do whatever we came here to do...
+    // Do whatever we came here to do...
 
-  // Shall we recurse left?
-  if(Node->Left) Walk(Node->Left);
+    // Shall we recurse left?
+    if(Node->Left) Walk(Node->Left);
 
-  // Shall we recurse right?
-  if(Node->Right) Walk(Node->Right);
+    // Shall we recurse right?
+    if(Node->Right) Walk(Node->Right);
 }
 </pre
     >
@@ -550,11 +550,10 @@ Label:
     // Shall we recurse right?
     if(Node->Right)
     {
-      // Tail recursion elimination used for efficiency
+        // Tail recursion elimination used for efficiency
+        Node = Node->Right;
 
-      Node = Node->Right;
-
-      goto Label;
+        goto Label;
     }
 }
 </pre
@@ -586,25 +585,25 @@ BOOL Done = FALSE;
 
 while(!Done)
 {
-  if(OpenPort())
-  {
-    if(InitPort())
+    if(OpenPort())
     {
-      if(InitModem())
-      {
-        if(SetupConnection())
+        if(InitPort())
         {
-          if(Logon())
-          {
-            if(Fetch())
+            if(InitModem())
             {
-              Done = TRUE; // Ouch! Hit the right hand side!
+                if(SetupConnection())
+                {
+                    if(Logon())
+                    {
+                        if(Fetch())
+                        {
+                            Done = TRUE; // Ouch! Hit the right hand side!
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 }
 </pre
     >

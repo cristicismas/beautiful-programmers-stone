@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <title>Thinking about Programming</title>
 
-    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -547,8 +547,8 @@
 // the event.
 
 for(DealerIterator DI(DealersOnline); DI.more(); DI++)
-  if(DI.CurrentDealer()->InPortfolio(TheEvent.GetStock()))
-    DI.CurrentDealer()->HandleEvent(TheEvent);</pre
+    if(DI.CurrentDealer()->InPortfolio(TheEvent.GetStock()))
+        DI.CurrentDealer()->HandleEvent(TheEvent);</pre
     >
     The definition of the objects has allowed the intentionality of the use case
     to be expressed succinctly. However, there is really no smaller granularity
@@ -790,30 +790,30 @@ for(DealerIterator DI(DealersOnline); DI.more(); DI++)
     </p>
     <pre>
 DWORD WINAPI SecondThread (LPVOID lpwThreadParm) {
-  BOOL fDone = FALSE;
-  DWORD dw;
+    BOOL fDone = FALSE;
+    DWORD dw;
 
-  while (!fDone) {
-    // Wait forever for the mutex to become signaled.
-    dw = WaitForSingleObject(g_hMutex, INFINITE);
+    while (!fDone) {
+        // Wait forever for the mutex to become signaled.
+        dw = WaitForSingleObject(g_hMutex, INFINITE);
 
-    if (dw == WAIT_OBJECT_0) {
-      // Mutex became signalled.
-      if (g_nIndex >= MAX_TIMES) {
-        fDone = TRUE;
-      } else {
-        g_nIndex++;
-        g_dwTimes[g_nIndex - 1] = GetTickCount():
-      }
+        if (dw == WAIT_OBJECT_0) {
+            // Mutex became signalled.
+            if (g_nIndex >= MAX_TIMES) {
+                fDone = TRUE;
+            } else {
+                g_nIndex++;
+                g_dwTimes[g_nIndex - 1] = GetTickCount():
+            }
 
-      // Release the mutex.
-      ReleaseMutex(g_hMutex);
-    } else {
-      // The mutex was abandoned.
-      break;// Exit the while loop.
+            // Release the mutex.
+            ReleaseMutex(g_hMutex);
+        } else {
+            // The mutex was abandoned.
+            break;// Exit the while loop.
+        }
     }
-  }
-  return(0);
+    return(0);
 }</pre
     >
     First let's just simplify the brace style, loose the extra space between
@@ -825,36 +825,36 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm) {
     <pre>
 DWORD WINAPI SecondThread(LPVOID lpwThreadParm)
 {
-  BOOL fDone = FALSE;
-  DWORD dw;
+    BOOL fDone = FALSE;
+    DWORD dw;
 
-  while(!fDone)
-  {
-    // Wait forever for the mutex to become signaled.
-    dw = WaitForSingleObject(g_hMutex, INFINITE);
-
-    if(dw == WAIT_OBJECT_0)
+    while(!fDone)
     {
-      // Mutex became signalled.
-      if(g_nIndex >= MAX_TIMES)
-      {
-        fDone = TRUE;
-      }
-      else
-      {
-        g_nIndex++;
-        g_dwTimes[g_nIndex - 1] = GetTickCount():
-      }
+        // Wait forever for the mutex to become signaled.
+        dw = WaitForSingleObject(g_hMutex, INFINITE);
 
-      ReleaseMutex(g_hMutex);
+        if(dw == WAIT_OBJECT_0)
+        {
+            // Mutex became signalled.
+            if(g_nIndex >= MAX_TIMES)
+            {
+                fDone = TRUE;
+            }
+            else
+            {
+                g_nIndex++;
+                g_dwTimes[g_nIndex - 1] = GetTickCount():
+            }
+
+            ReleaseMutex(g_hMutex);
+        }
+        else
+        {
+            // The mutex was abandoned.
+            break;// Exit the while loop.
+        }
     }
-    else
-    {
-      // The mutex was abandoned.
-      break;// Exit the while loop.
-    }
-  }
-  return(0);
+    return(0);
 }</pre
     >
     It's easy to lose one local variable: dw is assigned then tested in the next
@@ -866,32 +866,32 @@ DWORD WINAPI SecondThread(LPVOID lpwThreadParm)
     <pre>
 DWORD WINAPI SecondThread (LPVOID lpwThreadParm) 
 {
-  BOOL fDone = FALSE;
+    BOOL fDone = FALSE;
 
-  while (!fDone) 
-  {
-    // Wait forever for the mutex to become signaled.
-    if (WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0)
+    while (!fDone) 
     {
-      // Mutex became signalled.
-      if (g_nIndex < MAX_TIMES)
-      {
-        g_dwTimes[g_nIndex++] = GetTickCount();
-      }
-      else
-      {
-        fDone = TRUE;
-      }
-      
-      ReleaseMutex(g_hMutex);
-    } 
-    else 
-    {
-      // The mutex was abandoned.
-      break;// Exit the while loop.
+        // Wait forever for the mutex to become signaled.
+        if (WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0)
+        {
+            // Mutex became signalled.
+            if (g_nIndex < MAX_TIMES)
+            {
+                g_dwTimes[g_nIndex++] = GetTickCount();
+            }
+            else
+            {
+                fDone = TRUE;
+            }
+            
+            ReleaseMutex(g_hMutex);
+        } 
+        else 
+        {
+            // The mutex was abandoned.
+            break;// Exit the while loop.
+        }
     }
-  }
-  return(0);
+    return(0);
 }</pre
     >
     The break depends only on the result of WaitForSingleObject, so it is a
@@ -908,11 +908,11 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
         // Mutex became signalled.
         if (g_nIndex < MAX_TIMES)
         {
-          g_dwTimes[g_nIndex++] = GetTickCount();
+            g_dwTimes[g_nIndex++] = GetTickCount();
         }
         else
         {
-          fDone = TRUE;
+            fDone = TRUE;
         }
 
         ReleaseMutex(g_hMutex);
@@ -936,9 +936,9 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
     while (!fDone && WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0) 
     {
         if (g_nIndex < MAX_TIMES)
-          g_dwTimes[g_nIndex++] = GetTickCount();
+            g_dwTimes[g_nIndex++] = GetTickCount();
         else
-          fDone = TRUE;
+            fDone = TRUE;
 
         ReleaseMutex(g_hMutex);
     }
@@ -966,17 +966,17 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
     <pre>
 DWORD SecondThread (void *ThreadParm) 
 {
-  BOOL done = FALSE;
-  
-  while (!done && WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0) 
-  {
-    if (Index < MAX_TIMES)
-      Times[Index++] = GetTickCount();
-    else
-      done = TRUE;
-    ReleaseMutex(Mutex);
-  }
-  return(0);
+    BOOL done = FALSE;
+    
+    while (!done && WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0) 
+    {
+        if (Index < MAX_TIMES)
+            Times[Index++] = GetTickCount();
+        else
+            done = TRUE;
+        ReleaseMutex(Mutex);
+    }
+    return(0);
 }
     </pre>
 
@@ -985,13 +985,13 @@ DWORD SecondThread (void *ThreadParm)
     <pre>
 DWORD SecondThread(void *ThreadParm)
 {
-  while(Index < MAX_TIMES && WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0)
-  {
-    if (Index < MAX_TIMES)
-      Times[Index++] = GetTickCount():
-    ReleaseMutex(Mutex);
-  }
-  return(0);
+    while(Index < MAX_TIMES && WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0)
+    {
+        if (Index < MAX_TIMES)
+            Times[Index++] = GetTickCount():
+        ReleaseMutex(Mutex);
+    }
+    return(0);
 }
     </pre>
     <p>

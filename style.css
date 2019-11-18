@@ -80,18 +80,7 @@ th, td, tr {
 
 @media (max-width: 1050px) {
   body {
-    max-width: 80%;
-  }
-
-  a.back-home {
-    padding: 5px;
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 650px) {
-  body {
-    max-width: 100%;
+    max-width: 90%;
   }
 
   a.back-home {
@@ -99,5 +88,11 @@ th, td, tr {
     display: block;
     margin-top: 30px;
     text-align: center;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  body {
+    max-width: 100%;
   }
 }

@@ -898,8 +898,7 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
 {
     BOOL fDone = FALSE;
 
-    while (!fDone &&
-            WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0) 
+    while (!fDone && WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0) 
     {
         // Mutex became signalled.
         if (g_nIndex < MAX_TIMES)
@@ -929,8 +928,7 @@ DWORD WINAPI SecondThread (LPVOID lpwThreadParm)
 {
     BOOL fDone = FALSE;
 
-    while (!fDone &&
-            WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0) 
+    while (!fDone && WaitForSingleObject(g_hMutex, INFINITE) == WAIT_OBJECT_0) 
     {
         if (g_nIndex < MAX_TIMES)
           g_dwTimes[g_nIndex++] = GetTickCount();
@@ -982,8 +980,7 @@ DWORD SecondThread (void *ThreadParm)
     <pre>
 DWORD SecondThread(void *ThreadParm)
 {
-  while(Index < MAX_TIMES && 
-    WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0)
+  while(Index < MAX_TIMES && WaitForSingleObject(Mutex, INFINITE) == WAIT_OBJECT_0)
   {
     if (Index < MAX_TIMES)
       Times[Index++] = GetTickCount():

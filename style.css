@@ -54,6 +54,16 @@ a.back-home {
   font-size: 25px;
 }
 
+.back-home-container {
+  text-align: center;
+}
+
+a.back-home-top {
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+}
+
 #navigation-links {
   display: flex;
   justify-content: center;

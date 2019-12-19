@@ -45,7 +45,6 @@ ul {
 ul li::before {
   content: "\003E"; 
   color: #0041ce;
-  margin-right: 5px;
 }
 
 li,
